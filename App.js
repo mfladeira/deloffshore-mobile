@@ -12,12 +12,13 @@ import * as ImagePicker from "expo-image-picker";
 export default function App() {
 	const [client, setClient] = React.useState("");
 	const [numberOfVessel, setNumberOfVessel] = React.useState("");
-	const [emailOfVessel, setEmailOfVessel] = React.useState("");
+	const [emailOfVessel, setEmailOfVessel] = React.useState("volans@starnav.com.br");
 	const [location, setLocation] = React.useState("Baía de Guanabara");
 	const [material, setMaterial] = React.useState("");
 	const [serviceOrder, setServiceOrder] = React.useState("");
 	const [serviceDescription, setServiceDescription] = React.useState("");
 	const [observation, setObservation] = React.useState("");
+	const [namesOfTeam, setNamesOfTeam] = React.useState([]);
 
 	const [date, setDate] = React.useState(new Date());
 	const [dateFinished, setDateFinished] = React.useState(new Date());
@@ -193,8 +194,8 @@ export default function App() {
             <p><strong>Material Utilizado:</strong>${material}</p>
             <p><strong>Ordem de Serviço:</strong> ${serviceOrder}</p>
             <p style="margin-top: 20px;"><strong>Equipe:</strong></p>
+			<p style="margin-bottom: 8px;">${namesOfTeam.map((item) => ` ${item}`)}</p>
 			<p>${teamFiltered.map((item) => ` ${item[0]}(${item[1]})`)}</p>
-
             <p style="margin-top: 15px;"><strong>Descrição do Serviço:</strong>${serviceDescription}</p>
         </section>
 
@@ -224,6 +225,7 @@ export default function App() {
 			</div>
             <p style="margin-top: 30px;"><strong>Observação:</strong>${observation}</p>
             <p style="margin-top: 15px;"><strong>Assinatura do responsável da embarcação: </strong></p>
+			<p style="margin-top: 60px;"><strong>Assinatura do responsável da equipe: </strong></p>
         </section>
 
     </main>
@@ -275,23 +277,61 @@ export default function App() {
 					</View>
 
 					<View style={styles.containerInput}>
-						<Text style={styles.textContainerInput}>Nome da embarcação</Text>
-						<TextInput
-							style={styles.input}
-							onChangeText={setNumberOfVessel}
-							value={numberOfVessel}
-							placeholder="Digite o Nome da embarcação"
-						/>
+						<Text style={styles.textContainerInput}>Escolha o nome da embarcação</Text>
+						<View style={{ borderWidth: 1, borderColor: "black", borderRadius: 4, width: "100%" }}>
+							<Picker
+								selectedValue={numberOfVessel}
+								onValueChange={(itemValue, itemIndex) => setNumberOfVessel(itemValue)}
+							>
+								<Picker.Item label="VOLANS" value="VOLANS" />
+								<Picker.Item label="TAURUS" value="TAURUS" />
+								<Picker.Item label="CEPHEUS" value="CEPHEUS" />
+								<Picker.Item label="HYDRA" value="HYDRA" />
+								<Picker.Item label="PHOENIX" value="PHOENIX" />
+								<Picker.Item label="SCORPIUS" value="SCORPIUS" />
+								<Picker.Item label="PERSEUS" value="PERSEUS" />
+								<Picker.Item label="URSUS" value="URSUS" />
+								<Picker.Item label="REGULUS" value="REGULUS" />
+								<Picker.Item label="CIRCINUS" value="CIRCINUS" />
+								<Picker.Item label="ANDROMEDA" value="ANDROMEDA" />
+								<Picker.Item label="AQUILA" value="AQUILA" />
+								<Picker.Item label="LIBRA" value="LIBRA" />
+								<Picker.Item label="DELPHINUS" value="DELPHINUS" />
+								<Picker.Item label="DRACO" value="DRACO" />
+								<Picker.Item label="AQUARIUS" value="AQUARIUS" />
+								<Picker.Item label="CYGNUS" value="CYGNUS" />
+								<Picker.Item label="CENTAURUS" value="CENTAURUS" />
+							</Picker>
+						</View>
 					</View>
 
 					<View style={styles.containerInput}>
-						<Text style={styles.textContainerInput}>Email do responsável da embarcação</Text>
-						<TextInput
-							style={styles.input}
-							onChangeText={setEmailOfVessel}
-							value={emailOfVessel}
-							placeholder="Digite o Email do responsável da embarcação"
-						/>
+						<Text style={styles.textContainerInput}>Escolha o email do responsável da embarcação</Text>
+						<View style={{ borderWidth: 1, borderColor: "black", borderRadius: 4, width: "100%" }}>
+							<Picker
+								selectedValue={emailOfVessel}
+								onValueChange={(itemValue, itemIndex) => setEmailOfVessel(itemValue)}
+							>
+								<Picker.Item label="volans@starnav.com.br" value="volans@starnav.com.br" />
+								<Picker.Item label="taurus@starnav.com.br" value="taurus@starnav.com.br" />
+								<Picker.Item label="cepheus@starnav.com.br" value="cepheus@starnav.com.br" />
+								<Picker.Item label="hydra@starnav.com.br" value="hydra@starnav.com.br" />
+								<Picker.Item label="phoenix@starnav.com.br" value="phoenix@starnav.com.br" />
+								<Picker.Item label="scorpius@starnav.com.br" value="scorpius@starnav.com.br" />
+								<Picker.Item label="perseus@starnav.com.br" value="perseus@starnav.com.br" />
+								<Picker.Item label="ursus@starnav.com.br" value="ursus@starnav.com.br" />
+								<Picker.Item label="regulus@starnav.com.br" value="regulus@starnav.com.br" />
+								<Picker.Item label="circinus@starnav.com.br" value="circinus@starnav.com.br" />
+								<Picker.Item label="andromeda@starnav.com.br" value="andromeda@starnav.com.br" />
+								<Picker.Item label="aquila@starnav.com.br" value="aquila@starnav.com.br" />
+								<Picker.Item label="libra@starnav.com.br" value="libra@starnav.com.br" />
+								<Picker.Item label="delphinus@starnav.com.br" value="delphinus@starnav.com.br" />
+								<Picker.Item label="draco@starnav.com.br" value="draco@starnav.com.br" />
+								<Picker.Item label="aquarius@starnav.com.br" value="aquarius@starnav.com.br" />
+								<Picker.Item label="cygnus@starnav.com.br" value="cygnus@starnav.com.br" />
+								<Picker.Item label="centaurus@starnav.com.br" value="centaurus@starnav.com.br" />
+							</Picker>
+						</View>
 					</View>
 
 					<View style={styles.containerInput}>
@@ -656,6 +696,119 @@ export default function App() {
 							onPress={() => setTeam({ ...team, "Caldeireiro Irata": team["Caldeireiro Irata"] + 1 })}
 						></FontAwesome.Button>
 					</View>
+
+					<View style={styles.containerInput}>
+						<Text style={styles.textContainerInput}>Selecione os nomes da equipe</Text>
+						<View style={{ borderWidth: 1, borderColor: "black", borderRadius: 4, width: "100%" }}>
+							<Picker
+								selectedValue={"SELECIONE..."}
+								onValueChange={(itemValue, itemIndex) => setNamesOfTeam([...namesOfTeam, itemValue])}
+							>
+								<Picker.Item label="SELECIONE..." value="SELECIONE..." />
+								<Picker.Item label="Alailson da Silva Pereira" value="Alailson da Silva Pereira" />
+								<Picker.Item label="Adriana de Jesus Oliveira " value="Adriana de Jesus Oliveira " />
+								<Picker.Item label="Alexsandro Machado da Silva" value="Alexsandro Machado da Silva" />
+								<Picker.Item
+									label="Anderson Carlos Ferreira de Sousa"
+									value="Anderson Carlos Ferreira de Sousa"
+								/>
+								<Picker.Item
+									label="Anderson Luiz Morais Oliveira"
+									value="Anderson Luiz Morais Oliveira"
+								/>
+								<Picker.Item
+									label="André Luiz de Sousa Ferreira"
+									value="André Luiz de Sousa Ferreira"
+								/>
+								<Picker.Item label="André Oliveira dos Santos" value="André Oliveira dos Santos" />
+								<Picker.Item
+									label="Antônio Carlos Pinheiro de Almeida"
+									value="Antônio Carlos Pinheiro de Almeida"
+								/>
+								<Picker.Item
+									label="Carlos Artur Braga de Barcelos"
+									value="Carlos Artur Braga de Barcelos"
+								/>
+								<Picker.Item label="Cláudio dos Santos Silva" value="Cláudio dos Santos Silva" />
+								<Picker.Item label="Cláudio Tavares Júnior" value="Cláudio Tavares Júnior" />
+								<Picker.Item label="Cleber Barbosa dos Santos" value="Cleber Barbosa dos Santos" />
+								<Picker.Item label="Daniel da Silva Santos" value="Daniel da Silva Santos" />
+								<Picker.Item
+									label="Dárya Rodrigues Cruz da Hora"
+									value="Dárya Rodrigues Cruz da Hora"
+								/>
+								<Picker.Item
+									label="Dhonatan dos Santos Sant'Ana"
+									value="Dhonatan dos Santos Sant'Ana"
+								/>
+								<Picker.Item label="Everaldo Cruz da Hora" value="Everaldo Cruz da Hora" />
+								<Picker.Item label="Felipe Alameida Santos" value="Felipe Alameida Santos" />
+								<Picker.Item label="Gilmar Francisco Soares" value="Gilmar Francisco Soares" />
+								<Picker.Item
+									label="Ian Fernandes de Souza Pessanha"
+									value="Ian Fernandes de Souza Pessanha"
+								/>
+								<Picker.Item label="Josivaldo Nunes" value="Josivaldo Nunes" />
+								<Picker.Item label="Josué Fontes Couto" value="Josué Fontes Couto" />
+								<Picker.Item
+									label="Leandro da Silva de Oliveira"
+									value="Leandro da Silva de Oliveira"
+								/>
+								<Picker.Item label="Leandro de Andrade Nogueira" value="Leandro de Andrade Nogueira" />
+								<Picker.Item label="Luiz Gustavo Alves Barcelos" value="Luiz Gustavo Alves Barcelos" />
+								<Picker.Item
+									label="Marcio Roberto Pereira da Silva"
+									value="Marcio Roberto Pereira da Silva"
+								/>
+								<Picker.Item label="Marcos Pinheiro Ribeiro" value="Marcos Pinheiro Ribeiro" />
+								<Picker.Item
+									label="Marcus Vinícius Silva Almeida"
+									value="Marcus Vinícius Silva Almeida"
+								/>
+								<Picker.Item label="Marilson Xavier de Souza" value="Marilson Xavier de Souza" />
+								<Picker.Item label="Mário Santana Gonçalves" value="Mário Santana Gonçalves" />
+								<Picker.Item label="Maurício Barcelos Gomes" value="Maurício Barcelos Gomes" />
+								<Picker.Item
+									label="Mauricio Francisco de Oliveira"
+									value="Mauricio Francisco de Oliveira"
+								/>
+								<Picker.Item
+									label="Michelle Ramalho da Conceição Albuquerque"
+									value="Michelle Ramalho da Conceição Albuquerque"
+								/>
+								<Picker.Item
+									label="Odazizio Conceição dos Santos"
+									value="Odazizio Conceição dos Santos"
+								/>
+								<Picker.Item label="Ormindo Amorim Filho" value="Ormindo Amorim Filho" />
+								<Picker.Item label="Rafael Carvalho Gomes" value="Rafael Carvalho Gomes" />
+								<Picker.Item label="Renato da Silva Vitorino" value="Renato da Silva Vitorino" />
+								<Picker.Item label="Rodnei Pereira da fonseca" value="Rodnei Pereira da fonseca" />
+								<Picker.Item label="Thiago Costa da Silva" value="Thiago Costa da Silva" />
+								<Picker.Item label="Walas Cerqueira dos Santos" value="Walas Cerqueira dos Santos" />
+								<Picker.Item label="Wellington Gomes Ernestino" value="Wellington Gomes Ernestino" />
+								<Picker.Item label="Wilson Eleutério da Rocha" value="Wilson Eleutério da Rocha" />
+								<Picker.Item
+									label="Wuilglam Lima De Carvalho Barbosa"
+									value="Wuilglam Lima De Carvalho Barbosa"
+								/>
+							</Picker>
+						</View>
+					</View>
+
+					<View style={styles.containerInput}>
+						<Text style={styles.textContainerInput}>Equipe Selecionada:</Text>
+						<View>
+							{namesOfTeam.map((item, index) => (
+								<View key={index}>
+									<Text style={{ textDecorationLine: "underline" }}>
+										{index + 1}: {item}
+									</Text>
+								</View>
+							))}
+						</View>
+					</View>
+
 					<View style={styles.containerInput}>
 						<Text style={styles.textContainerInput}>Descrição do serviço</Text>
 						<TextInput
